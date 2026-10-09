@@ -1,171 +1,319 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>Kaina Edit Prompt</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#111;
-color:white;
-}
-
-header{
-text-align:center;
-padding:30px;
-background:#000;
-border-bottom:3px solid #00bfff;
-}
-
-.profile{
-width:180px;
-height:180px;
-border-radius:50%;
-object-fit:cover;
-border:5px solid #00bfff;
-box-shadow:0 0 25px #00bfff;
-}
-
-.slogan{
-color:#00bfff;
-margin-top:10px;
-font-size:20px;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:20px;
-}
-
-input,textarea,select{
-width:100%;
-padding:10px;
-margin:5px 0;
-border-radius:8px;
-border:none;
-}
-
-button{
-padding:10px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:#00bfff;
-color:white;
-margin:3px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:20px;
-margin-top:20px;
-}
-
-.card{
-background:#1e1e1e;
-border-radius:12px;
-padding:10px;
-}
-
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-border-radius:8px;
-}
-
-.badge{
-background:orange;
-padding:5px 10px;
-border-radius:20px;
-display:inline-block;
-margin-bottom:10px;
-}
-
-.section-title{
-margin-top:30px;
-margin-bottom:10px;
-color:#00bfff;
-}
-
-#adminPanel{
-display:none;
-background:#1a1a1a;
-padding:15px;
-border-radius:10px;
-}
-
-.dark-btn{
-background:#444;
-}
-
-</style>
-</head>
-
-<body>
-
 <header>
 
-kaina-profile.jpg
+<img src="kaina-profile.jpg" class="hero" alt="Kaina">
 
-<h1>KAINA EDIT PROMPT</h1>
-
-<div class="slogan">
+s="slogan">
 Transforming Shots To Another Level
 </div>
 
+<p class="hero-stats">
+🔥 1000+ Prompts • 📸 90s Filters • 🎨 AI Editing • ❤️ Favorites
+</p>
+
 </header>
+
+.hero{
+width:220px;
+height:220px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid #00c6ff;
+box-shadow:0 0 35px #00c6ff;
+}
+
+.hero-stats{
+margin-top:15px;
+color:#ccc;
+}
 
 <div class="container">
 
-<h2 class="section-title">
-Search Prompts
-</h2>
-
 <input
 id="search"
-placeholder="Search prompt..."
+class="search"
+placeholder="Search prompts..."
 onkeyup="searchPrompts()">
+
+</div>
+
+function searchPrompts(){
+
+let input =
+document.getElementById("search")
+.value.toLowerCase();
+
+let cards =
+document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+
+if(card.innerText.toLowerCase().includes(input))
+{
+card.style.display="block";
+}
+else
+{
+card.style.display="none";
+}
+
+});
+
+}
+
+<section>
+
+<h2>📚 Prompt Library</h2>
+
+<div class="grid">
+
+<div class="card">
+
+https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600
+
+<h3>Professional Headshot</h3>
+
+<div class="prompt">
+Create a professional business portrait with clean lighting and premium LinkedIn quality.
+</div>
+
+<button class="copy">
+Copy Prompt
+</button>
+
+<button class="fav">
+❤️ Favorite
+</button>
+
+</div>
+
+<div class="card">
+
+https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600
+
+<h3>Luxury Fashion</h3>
+
+<div class="prompt">
+Transform image into luxury fashion editorial with dramatic lighting and magazine-quality retouching.
+</div>
+
+<button class="copy">
+Copy Prompt
+</button>
+
+<button class="fav">
+❤️ Favorite
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>📼 90s Filters</h2>
+
+<div class="grid">
+
+<div class="card">
+
+https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600
+
+<h3>Kodak Gold 1995</h3>
+
+<div class="prompt">
+
+Apply Kodak Gold 1995 film colors with realistic grain and warm sunlight.
+
+</div>
+
+<button class="copy">
+Copy Prompt
+</button>
+
+<button class="fav">
+❤️ Favorite
+</button>
+
+</div>
+
+<div class="card">
+
+https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600
+
+<h3>VHS Camcorder</h3>
+
+<div class="prompt">
+
+Create VHS tape effects with scanlines and retro television distortion.
+
+</div>
+
+<button class="copy">
+Copy Prompt
+</button>
+
+<button class="fav">
+❤️ Favorite
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+document.addEventListener("click",(e)=>{
+
+if(e.target.classList.contains("copy")){
+
+let promptText =
+e.target.parentElement
+.querySelector(".prompt")
+.innerText;
+
+navigator.clipboard.writeText(promptText);
+
+e.target.innerText="✅ Copied";
+
+setTimeout(()=>{
+e.target.innerText="Copy Prompt";
+},1500);
+
+}
+
+});
+``
+
+let favorites =
+JSON.parse(localStorage.getItem("kainaFav"))
+|| [];
+
+document.addEventListener("click",(e)=>{
+
+if(e.target.classList.contains("fav")){
+
+let card =
+e.target.parentElement;
+
+let title =
+card.querySelector("h3").innerText;
+
+let prompt =
+card.querySelector(".prompt").innerText;
+
+favorites.push({
+title:title,
+prompt:prompt
+});
+
+localStorage.setItem(
+"kainaFav",
+JSON.stringify(favorites)
+);
+
+e.target.innerText="❤️ Saved";
+
+}
+
+});
+
+
+<section>
+
+<h2>❤️ My Favorites</h2>
+
+<button onclick="showFavorites()">
+Show Favorites
+</button>
+
+<div id="favoritesArea"></div>
+
+</section>
+
+function showFavorites(){
+
+let area=
+document.getElementById(
+"favoritesArea"
+);
+
+let saved=
+JSON.parse(
+localStorage.getItem(
+"kainaFav"
+)
+) || [];
+
+let html="";
+
+saved.forEach(item=>{
+
+html += `
+<div class="card">
+<h3>${item.title}</h3>
+<div class="prompt">
+${item.prompt}
+</div>
+</div>
+`;
+
+});
+
+area.innerHTML=html;
+
+}
+
+<section>
+
+<h2>🤖 Kaina Assistant</h2>
+
+<textarea
+id="assistantInput"
+placeholder="Describe your image...">
+</textarea>
+
+<button onclick="generatePrompt()">
+Generate
+</button>
+
+<div id="assistantOutput"></div>
+
+</section>
+
+function generatePrompt(){
+
+let text=
+document.getElementById(
+"assistantInput"
+).value;
+
+document.getElementById(
+"assistantOutput"
+).innerHTML=`
+
+<h3>Suggested Prompt</h3>
+
+<p>
+
+Transform image into a 
+
+<section>
 
 <button onclick="showLogin()">
 Admin Login
 </button>
 
-<h2 class="section-title">
-Kaina Assistant
-</h2>
+<div id="loginBox"
+style="display:none;">
 
-<textarea
-id="assistantText"
-placeholder="Describe what you want...">
-</textarea>
+<input id="user"
+placeholder="Username">
 
-<button onclick="suggestPrompt()">
-Generate Suggestion
-</button>
-
-<div id="suggestion"></div>
-
-<div id="loginBox" style="display:none">
-
-<h2 class="section-title">
-Admin Login
-</h2>
-
-<input id="user" placeholder="Username">
-<input id="pass" type="password" placeholder="Password">
+<input id="pass"
+type="password"
+placeholder="Password">
 
 <button onclick="login()">
 Login
@@ -173,200 +321,16 @@ Login
 
 </div>
 
-<div id="adminPanel">
-
-<h2 class="section-title">
-Add Prompt
-</h2>
-
-<input type="file" id="imageUpload">
-
-<textarea
-id="newPrompt"
-placeholder="Prompt">
-</textarea>
-
-<select id="category">
-
-<option>90s Filters</option>
-<option>Anime</option>
-<option>Photography</option>
-<option>Cyberpunk</option>
-<option>Fashion</option>
-<option>Product Ads</option>
-
-</select>
-
-<button onclick="addPrompt()">
-Add Prompt
-</button>
-
-</div>
-
-<h2 class="section-title">
-Featured Prompts
-</h2>
-
-<div class="grid" id="gallery"></div>
-
-</div>
-
-<script>
+</section>
 
 const ADMIN="admin";
 const PASSWORD="1234";
 
-let prompts=
-JSON.parse(localStorage.getItem("kaina")) || [
-
-{
-category:"90s Filters",
-image:"https://via.placeholder.com/400x250?text=Kodak+1995",
-prompt:"Transform image into Kodak Gold 1995 film style."
-},
-
-{
-category:"90s Filters",
-image:"https://via.placeholder.com/400x250?text=VHS",
-prompt:"Convert image into VHS camcorder tape effect."
-},
-
-{
-category:"Fashion",
-image:"https://via.placeholder.com/400x250?text=Y2K",
-prompt:"Create Y2K fashion editorial look."
-},
-
-{
-category:"Anime",
-image:"https://via.placeholder.com/400x250?text=Anime",
-prompt:"Transform photograph into detailed anime illustration."
-},
-
-{
-category:"Cyberpunk",
-image:"https://via.placeholder.com/400x250?text=Cyberpunk",
-prompt:"Create futuristic neon cyberpunk city vibe."
-}
-
-];
-
-function saveData(){
-
-localStorage.setItem(
-"kaina",
-JSON.stringify(prompts)
-);
-
-}
-
-function render(data=prompts){
-
-let html="";
-
-data.forEach((item,index)=>{
-
-html+=`
-
-<div class="card">
-
-<div class="badge">
-${item.category}
-</div>
-
-<img src="${item.image}">
-
-<p>
-${item.prompt}
-</p>
-
-<button onclick="copyPrompt(${index})">
-Copy
-</button>
-
-<button onclick="editPrompt(${index})">
-Edit
-</button>
-
-<button onclick="deletePrompt(${index})">
-Delete
-</button>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("gallery")
-.innerHTML=html;
-
-}
-
-function copyPrompt(i){
-
-navigator.clipboard.writeText(
-prompts[i].prompt
-);
-
-alert("Copied");
-
-}
-
-function editPrompt(i){
-
-let value=
-prompt(
-"Edit Prompt",
-prompts[i].prompt
-);
-
-if(value){
-
-prompts[i].prompt=value;
-
-saveData();
-render();
-
-}
-
-}
-
-function deletePrompt(i){
-
-if(confirm("Delete Prompt?")){
-
-prompts.splice(i,1);
-
-saveData();
-render();
-
-}
-
-}
-
-function searchPrompts(){
-
-let q=
-document
-.getElementById("search")
-.value
-.toLowerCase();
-
-let filtered=
-prompts.filter(
-x=>x.prompt.toLowerCase().includes(q)
-);
-
-render(filtered);
-
-}
-
 function showLogin(){
 
-document
-.getElementById("loginBox")
-.style.display="block";
+document.getElementById(
+"loginBox"
+).style.display="block";
 
 }
 
@@ -380,89 +344,83 @@ document.getElementById("pass").value;
 
 if(u===ADMIN && p===PASSWORD){
 
-document
-.getElementById("adminPanel")
-.style.display="block";
-
-alert("Welcome Admin");
+document.getElementById(
+"adminPanel"
+).style.display="block";
 
 }else{
 
-alert("Invalid Login");
+alert("Wrong Login");
 
 }
 
 }
+
+<div id="adminPanel"
+style="display:none;">
+
+<h2>Admin Dashboard</h2>
+
+<input
+id="newTitle"
+placeholder="Prompt Title">
+
+<textarea
+id="newPrompt"
+placeholder="Prompt">
+</textarea>
+
+<button onclick="addPrompt()">
+Add Prompt
+</button>
+
+</div>
 
 function addPrompt(){
 
-let file=
-document.getElementById("imageUpload")
-.files[0];
+let title=
+document.getElementById(
+"newTitle"
+).value;
 
-let promptText=
-document.getElementById("newPrompt").value;
+let prompt=
+document.getElementById(
+"newPrompt"
+).value;
 
-let category=
-document.getElementById("category").value;
+let gallery=
+document.querySelector(".grid");
 
-if(!file || !promptText){
+gallery.insertAdjacentHTML(
 
-alert("Add image and prompt");
+"afterbegin",
 
-return;
+`
 
-}
+<div class="card">
 
-let reader=new FileReader();
+<h3>${title}</h3>
 
-reader.onload=(e)=>{
+<div class="prompt">
 
-prompts.unshift({
+${prompt}
 
-category:category,
-image:e.target.result,
-prompt:promptText
+</div>
 
-});
+<button class="copy">
+Copy Prompt
+</button>
 
-saveData();
-render();
+<button class="fav">
+❤️ Favorite
+</button>
 
-};
+</div>
 
-reader.readAsDataURL(file);
+`
 
-}
-
-function suggestPrompt(){
-
-let input=
-document
-.getElementById("assistantText")
-.value;
-
-document
-.getElementById("suggestion")
-.innerHTML=`
-
-<h3>Suggested Prompt</h3>
-
-<p>
-Transform this image into a premium professional edit.
-Preserve details. Enhance lighting.
-Add cinematic color grading.
-Ultra realistic. 8K quality.
-Based on: ${input}
-</p>
-
-`;
+);
 
 }
 
-render();
 
-</script>
-
-</body>
-</html>
