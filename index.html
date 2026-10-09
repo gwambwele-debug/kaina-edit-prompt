@@ -1,426 +1,125 @@
-<header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaina Edit Prompt</title>
 
-<img src="kaina-profile.jpg" class="hero" alt="Kaina">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
 
-s="slogan">
-Transforming Shots To Another Level
-</div>
+body{
+background:#0b0b0b;
+color:white;
+}
 
-<p class="hero-stats">
-🔥 1000+ Prompts • 📸 90s Filters • 🎨 AI Editing • ❤️ Favorites
-</p>
-
-</header>
+header{
+text-align:center;
+padding:40px 20px;
+background:#000;
+border-bottom:3px solid #00c6ff;
+}
 
 .hero{
-width:220px;
-height:220px;
+width:200px;
+height:200px;
 border-radius:50%;
 object-fit:cover;
 border:5px solid #00c6ff;
-box-shadow:0 0 35px #00c6ff;
+box-shadow:0 0 25px #00c6ff;
 }
 
-.hero-stats{
-margin-top:15px;
-color:#ccc;
+h1{
+margin-top:20px;
+font-size:42px;
 }
 
-<div class="container">
-
-<input
-id="search"
-class="search"
-placeholder="Search prompts..."
-onkeyup="searchPrompts()">
-
-</div>
-
-function searchPrompts(){
-
-let input =
-document.getElementById("search")
-.value.toLowerCase();
-
-let cards =
-document.querySelectorAll(".card");
-
-cards.forEach(card=>{
-
-if(card.innerText.toLowerCase().includes(input))
-{
-card.style.display="block";
-}
-else
-{
-card.style.display="none";
+.slogan{
+color:#00c6ff;
+font-size:20px;
+margin-top:10px;
 }
 
-});
-
+.container{
+max-width:1300px;
+margin:auto;
+padding:20px;
 }
 
-<section>
-
-<h2>📚 Prompt Library</h2>
-
-<div class="grid">
-
-<div class="card">
-
-https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600
-
-<h3>Professional Headshot</h3>
-
-<div class="prompt">
-Create a professional business portrait with clean lighting and premium LinkedIn quality.
-</div>
-
-<button class="copy">
-Copy Prompt
-</button>
-
-<button class="fav">
-❤️ Favorite
-</button>
-
-</div>
-
-<div class="card">
-
-https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600
-
-<h3>Luxury Fashion</h3>
-
-<div class="prompt">
-Transform image into luxury fashion editorial with dramatic lighting and magazine-quality retouching.
-</div>
-
-<button class="copy">
-Copy Prompt
-</button>
-
-<button class="fav">
-❤️ Favorite
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>📼 90s Filters</h2>
-
-<div class="grid">
-
-<div class="card">
-
-https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600
-
-<h3>Kodak Gold 1995</h3>
-
-<div class="prompt">
-
-Apply Kodak Gold 1995 film colors with realistic grain and warm sunlight.
-
-</div>
-
-<button class="copy">
-Copy Prompt
-</button>
-
-<button class="fav">
-❤️ Favorite
-</button>
-
-</div>
-
-<div class="card">
-
-https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600
-
-<h3>VHS Camcorder</h3>
-
-<div class="prompt">
-
-Create VHS tape effects with scanlines and retro television distortion.
-
-</div>
-
-<button class="copy">
-Copy Prompt
-</button>
-
-<button class="fav">
-❤️ Favorite
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-document.addEventListener("click",(e)=>{
-
-if(e.target.classList.contains("copy")){
-
-let promptText =
-e.target.parentElement
-.querySelector(".prompt")
-.innerText;
-
-navigator.clipboard.writeText(promptText);
-
-e.target.innerText="✅ Copied";
-
-setTimeout(()=>{
-e.target.innerText="Copy Prompt";
-},1500);
-
+.search{
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+margin-bottom:20px;
 }
 
-});
-``
-
-let favorites =
-JSON.parse(localStorage.getItem("kainaFav"))
-|| [];
-
-document.addEventListener("click",(e)=>{
-
-if(e.target.classList.contains("fav")){
-
-let card =
-e.target.parentElement;
-
-let title =
-card.querySelector("h3").innerText;
-
-let prompt =
-card.querySelector(".prompt").innerText;
-
-favorites.push({
-title:title,
-prompt:prompt
-});
-
-localStorage.setItem(
-"kainaFav",
-JSON.stringify(favorites)
-);
-
-e.target.innerText="❤️ Saved";
-
+.section-title{
+margin:30px 0 15px;
+color:#00c6ff;
 }
 
-});
-
-
-<section>
-
-<h2>❤️ My Favorites</h2>
-
-<button onclick="showFavorites()">
-Show Favorites
-</button>
-
-<div id="favoritesArea"></div>
-
-</section>
-
-function showFavorites(){
-
-let area=
-document.getElementById(
-"favoritesArea"
-);
-
-let saved=
-JSON.parse(
-localStorage.getItem(
-"kainaFav"
-)
-) || [];
-
-let html="";
-
-saved.forEach(item=>{
-
-html += `
-<div class="card">
-<h3>${item.title}</h3>
-<div class="prompt">
-${item.prompt}
-</div>
-</div>
-`;
-
-});
-
-area.innerHTML=html;
-
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
 }
 
-<section>
-
-<h2>🤖 Kaina Assistant</h2>
-
-<textarea
-id="assistantInput"
-placeholder="Describe your image...">
-</textarea>
-
-<button onclick="generatePrompt()">
-Generate
-</button>
-
-<div id="assistantOutput"></div>
-
-</section>
-
-function generatePrompt(){
-
-let text=
-document.getElementById(
-"assistantInput"
-).value;
-
-document.getElementById(
-"assistantOutput"
-).innerHTML=`
-
-<h3>Suggested Prompt</h3>
-
-<p>
-
-Transform image into a 
-
-<section>
-
-<button onclick="showLogin()">
-Admin Login
-</button>
-
-<div id="loginBox"
-style="display:none;">
-
-<input id="user"
-placeholder="Username">
-
-<input id="pass"
-type="password"
-placeholder="Password">
-
-<button onclick="login()">
-Login
-</button>
-
-</div>
-
-</section>
-
-const ADMIN="admin";
-const PASSWORD="1234";
-
-function showLogin(){
-
-document.getElementById(
-"loginBox"
-).style.display="block";
-
+.card{
+background:#151515;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 0 10px rgba(0,198,255,.2);
 }
 
-function login(){
-
-let u=
-document.getElementById("user").value;
-
-let p=
-document.getElementById("pass").value;
-
-if(u===ADMIN && p===PASSWORD){
-
-document.getElementById(
-"adminPanel"
-).style.display="block";
-
-}else{
-
-alert("Wrong Login");
-
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
 }
 
+.card-body{
+padding:15px;
 }
 
-<div id="adminPanel"
-style="display:none;">
-
-<h2>Admin Dashboard</h2>
-
-<input
-id="newTitle"
-placeholder="Prompt Title">
-
-<textarea
-id="newPrompt"
-placeholder="Prompt">
-</textarea>
-
-<button onclick="addPrompt()">
-Add Prompt
-</button>
-
-</div>
-
-function addPrompt(){
-
-let title=
-document.getElementById(
-"newTitle"
-).value;
-
-let prompt=
-document.getElementById(
-"newPrompt"
-).value;
-
-let gallery=
-document.querySelector(".grid");
-
-gallery.insertAdjacentHTML(
-
-"afterbegin",
-
-`
-
-<div class="card">
-
-<h3>${title}</h3>
-
-<div class="prompt">
-
-${prompt}
-
-</div>
-
-<button class="copy">
-Copy Prompt
-</button>
-
-<button class="fav">
-❤️ Favorite
-</button>
-
-</div>
-
-`
-
-);
-
+.card h3{
+margin-bottom:10px;
 }
 
+.prompt{
+margin-top:10px;
+line-height:1.5;
+}
 
+.btn{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-top:10px;
+margin-right:5px;
+color:white;
+}
+
+.copy{
+background:#00c6ff;
+}
+
+.fav{
+background:#e91e63;
+}
+
+textarea,input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+margin-top:10px;
+}
+
+#
